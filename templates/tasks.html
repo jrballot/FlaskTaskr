@@ -1,0 +1,106 @@
+{% extends "_base.html" %}
+{% block content %}
+
+<h1></h1>
+<a href="/logout">Logout</a>
+<div class="add-task">
+  <h3>Add a new task:</h3>
+  <table>
+    <tr>
+      <form action="{{ url_for('new_task')}}" method="post">
+        <td>
+          <label for="">Task Name:</label>
+          <input type="text" name="name">
+        </td>
+        <td>
+          <label for="">Due date (mm/dd/yyy):</label>
+          <input type="text" name="due_date" width="120px">
+        </td>
+        <td>
+          <label for="">Priority:
+            <select name="priority" width="100px">
+              <option value="1"></option>
+              <option value="2"></option>
+              <option value="3"></option>
+              <option value="4"></option>
+              <option value="5"></option>
+              <option value="6"></option>
+              <option value="7"></option>
+              <option value="8"></option>
+              <option value="9"></option>
+              <option value="10"></option>
+            </select>
+          </label>
+        </td>
+        <td>
+          &nbsp;
+          &nbsp;
+          <input type="submit" class="button" value="Save">
+        </td>
+      </form>
+    </tr>
+  </table>
+</div>
+
+<div class="entries">
+  <br>
+  <br>
+  <h2>Open Tasks:</h2>
+  <div class="datagrid">
+    <table>
+      <thead>
+        <tr>
+          <th width="300px"><strong>Task Name</strong></th>
+          <th width="100px"><strong>Due Date</strong></th>
+          <th width="50px"><strong>Priority</strong></th>
+          <th><strong>Actions</strong></th>
+        </tr>
+      </thead>
+      {% for task in open_tasks %}
+        <tr>
+          <td width="300px"> {{ task.name }} </td>
+          <td width="100px"> {{ task.due_date }} </td>
+          <td width="50px"> {{ task.priority }} </td>
+          <td>
+            <a href="{{ url_for('delete_entry', task_id = task.task_id) }}">Delete</a>
+            <a href="{{ url_for('complete', task_id = task.task_id) }}">Mask as Complete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <br>
+  <br>
+</div>
+
+<div class="entries">
+  <br>
+  <br>
+  <h2>Closed Tasks:</h2>
+  <div class="datagrid">
+    <table>
+      <thead>
+        <tr>
+          <th width="300px"><strong>Task Name</strong></th>
+          <th width="100px"><strong>Due Date</strong></th>
+          <th width="50px"><strong>Priority</strong></th>
+          <th><strong>Actions</strong></th>
+        </tr>
+      </thead>
+      {% for task in closed_tasks %}
+        <tr>
+          <td width="300px"> {{ task.name }} </td>
+          <td width="300px"> {{ task.due_date }} </td>
+          <td width="300px"> {{ task.priority }} </td>
+          <td>
+            <a href="{{ url_for('delete_entry', task_id = task.task_id) }}">Delete</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </table>
+  </div>
+  <br>
+  <br>
+</div>
+
+{% endblock %}
