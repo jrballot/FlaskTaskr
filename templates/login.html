@@ -1,7 +1,7 @@
 {% extends "_base.html" %}
 {% block content %}
 
-<h1>Welcome to FlaskTaskr</h1>
+<!-- <h1>Welcome to FlaskTaskr</h1>
 <h3>Please login to access your task list.</h3>
 
 <form method="post" action="/">
@@ -10,6 +10,22 @@
   <input type="submit" value="Login">
 </form>
 
-<p><em> User 'admin' for the username and password.</em></p>
+<p><em> User 'admin' for the username and password.</em></p> -->
+
+    <div class="col-xs-4 col-xs-offset-4 text-center well">
+        <div class=""><img src="static/img/flask-icon.png" alt=""></div>
+        <br>
+        <form action="/" class="form" method="post">
+            <div class="form-group"><input type="text" name="username" class="form-control" placeholder="Enter Username" value="{{ request.form.username }}" ></div>
+            <div class="form-group"><input type="password" name="password" class="form-control" placeholder="Enter Password" value="{{ request.form.password }}"></div>
+            <button class="btn btn-primary" value="Login" type="submit">Login</button>
+        </form>
+        <br>
+        <p><em>Need an account? </em><a href="register">Signup!!</a></p>
+    </div>
+
+
+
+</div>
 
 {% endblock %}
