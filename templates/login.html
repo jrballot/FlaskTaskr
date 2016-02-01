@@ -16,8 +16,15 @@
         <div class=""><img src="static/img/flask-icon.png" alt=""></div>
         <br>
         <form action="/" class="form" method="post">
-            <div class="form-group"><input type="text" name="username" class="form-control" placeholder="Enter Username" value="{{ request.form.username }}" ></div>
-            <div class="form-group"><input type="password" name="password" class="form-control" placeholder="Enter Password" value="{{ request.form.password }}"></div>
+            {{ form.csrf_token }}
+            <div class="form-group">
+              <!-- <input type="text" name="username" class="form-control" placeholder="Enter Username" value="{{ request.form.username }}" > -->
+              {{ form.name.label }}: {{ form.name }}
+            </div>
+            <div class="form-group">
+              <!-- <input type="password" name="password" class="form-control" placeholder="Enter Password" value="{{ request.form.password }}"> -->
+              {{ form.password.label }}: {{ form.password }}
+            </div>
             <button class="btn btn-primary" value="Login" type="submit">Login</button>
         </form>
         <br>
