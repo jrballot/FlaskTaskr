@@ -5,7 +5,11 @@
   <title>Welcome to FlaskTaskr!!</title>
   <!-- <link rel="stylesheet" href="{{ url_for('static',filename='css/main.css')}}"> -->
   <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
 
+  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
 </head>
 <body>
 
@@ -13,7 +17,7 @@
     <div class="row">
     {% for message in get_flashed_messages() %}
       <!-- <div class="flash">{{ message }}</div> -->
-      <div class="alert alert-success text-center"> {{ message }}  </div>
+      <div class="alert alert-success text-center">{{ message }}</div>
     {% endfor %}
     </div>
     {% if error %}
@@ -27,8 +31,8 @@
 
     </div>
 
-
-  <script src="js/bootstrap.js"></script>
-  <script src="js/jquery-1.12.0.js"></script>
+  <script src="{{ url_for('static', filename='js/jquery-1.12.0.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
 </body>
 </html>

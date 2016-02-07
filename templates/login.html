@@ -15,20 +15,35 @@
     <div class="col-xs-4 col-xs-offset-4 text-center well">
         <div class=""><img src="static/img/flask-icon.png" alt=""></div>
         <br>
+        <h3>Please sing in to access your task list</h3>
         <form action="/" class="form" method="post">
             {{ form.csrf_token }}
             <div class="form-group">
               <!-- <input type="text" name="username" class="form-control" placeholder="Enter Username" value="{{ request.form.username }}" > -->
-              {{ form.name.label }}: {{ form.name }}
+              {{ form.name(placeholder="name" )}}
+              {% if form.name.errors %}
+              <div class="alert alert-danger">
+                {% for error in form.name.errors %}
+                  {{error}}
+                {% endfor %}
+              </div>
+              {% endif %}
             </div>
             <div class="form-group">
               <!-- <input type="password" name="password" class="form-control" placeholder="Enter Password" value="{{ request.form.password }}"> -->
-              {{ form.password.label }}: {{ form.password }}
+              {{ form.password(placeholder="password" )}}
+              {% if form.password.errors %}
+              <div class="alert alert-danger">
+                {% for error in form.password.errors %}
+                  {{error}}
+                {% endfor %}
+              </div>
+              {% endif %}
             </div>
             <button class="btn btn-primary" value="Login" type="submit">Login</button>
         </form>
         <br>
-        <p><em>Need an account? </em><a href="register">Signup!!</a></p>
+        <p><em>Need an account? </em><a href="register" tabindex="0">Signup!!</a></p>
     </div>
 
 
