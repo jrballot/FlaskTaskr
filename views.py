@@ -1,4 +1,4 @@
-
+#coding=utf-8
 
 
 # import sqlite3
@@ -57,8 +57,10 @@ def login():
     error = None
     form = LoginForm(request.form)
     if request.method == 'POST':
+        # verifica as informações do form com os validadores da função LoginForm em forms.py
         if form.validate_on_submit():
             user = User.query.filter_by(name=request.form['name']).first()
+            # verifica se o nome não está None e compara a informação do form com a informação do banco
             if user is not None and user.password == request.form['password']:
                 session['logged_in'] = True
                 session['user_id'] = user.id
@@ -89,6 +91,9 @@ def tasks():
     ## Comentado após inserir o tratamento de erro
     # open_tasks = db.session.query(Task).filter_by(status=1).order_by(Task.due_date.asc())
     # closed_tasks = db.session.query(Task).filter_by(status=0).order_by(Task.due_date.asc())
+
+    ## Função somente retorna um template para tasks.html com as taregas abertas e fechadas
+    ## form=AddTaskForm(request.form) 
     return render_template(
         'tasks.html',
         form=AddTaskForm(request.form),
