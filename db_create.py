@@ -1,3 +1,5 @@
+#coding=utf-8
+
 import sqlite3
 from _config import DATABASE_PATH
 from views import db
