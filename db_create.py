@@ -1,9 +1,7 @@
 #coding=utf-8
 
-import sqlite3
-from _config import DATABASE_PATH
-from views import db
-from models import Task
+from project import db
+from project.models import Task, User
 from datetime import date
 
 ## Código sem SQLAlchemy
@@ -17,7 +15,6 @@ from datetime import date
 
 db.create_all()
 
-# db.session.add(Task("Finishi this tutorial", date(2015, 3, 13), 10, 1))
-# db.session.add(Task("Finishi Real Python", date(2015, 3, 13), 10, 1))
+db.session.add(Task("Finishi this tutorial", date(2015, 3, 13), 10, date(2015,2,13) , 1, 1))
 
 db.session.commit()

@@ -1,7 +1,8 @@
-# models.py
 
-from views import db
+
+from project import db
 import datetime
+
 
 class Task(db.Model):
     __tablename__ = "tasks"
@@ -15,7 +16,6 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 
-
     def __init__(self, name, due_date, priority, posted_date, status, user_id):
         self.name = name
         self.due_date = due_date
@@ -25,7 +25,7 @@ class Task(db.Model):
         self.user_id = user_id
 
     def __repr__(self):
-        return '<name {0}>'.format(self.name)
+        return '<name> {0}'.format(self.name)
 
 class User(db.Model):
     __tablename__ = "users"
@@ -33,15 +33,17 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String, unique=True, nullable=False)
     email = db.Column(db.String, unique=True, nullable=False)
-    password = db.Column(db.String, nullable=False)
-    tasks = db.relationship('Task',backref='poster')
+    password = db.Column(db.String, nullable = False)
+    tasks = db.relationship('Task', backref='poster')
     role = db.Column(db.String, default='user')
 
+
     def __init__(self, name=None, email=None, password=None, role=None):
-        self.name = name
-        self.email = email
-        self.password = password
-        self.role = role
+        
+       self.name = name
+       self.email = email
+       self.password = password
+       self.role = role
 
     def __repr__(self):
-        return '<User: {0} Email: {1} Password: {2} Role: {3}>'.format(self.name,self.email,self.password,self.role)
+        return '<User: {0} Email: {1} Password: {2} Role: {3}>'.format(self.name, self.email, self.password, self.role)
