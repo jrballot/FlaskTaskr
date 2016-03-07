@@ -45,6 +45,13 @@ class AllTests(unittest.TestCase):
         return self.app.post('register/',data=dict(name=name,email=email,password=password,confirm=confirm), follow_redirects=True)
 
 
+    def test_task_template_displays_logged_in_user_name(self):
+        self.register(
+                'Fletcher','fletcher@realpython.com','python101','python101'
+                )
+        self.login('Fletcher','python101')
+        response = self.app.get('tasks/',follow_redirects=True)
+        self.assertIn(b'Fletcher', response.data)
 
 
     def test_form_is_present_on_login_page(self):
@@ -107,6 +114,8 @@ class AllTests(unittest.TestCase):
     def test_not_logged_in_users_cannot_access_tasks_page(self):
         response = self.app.get('tasks/', follow_redirects=True)
         self.assertIn(b'You need to login first.', response.data)
+
+
 
 
 

@@ -10,7 +10,13 @@
     </div>
     <div class="navbar-collapse collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span></a></li>
+        {% if not session.logged_in %}
+            <li><a href="{{url_for('users.register')}}">Signup</a></li>
+        {% else %}
+            <li><a href="">Welcome, {{username}}.</a></li>
+            <li><a href="{{url_for('users.logout')}}"><span class="glyphicon glyphicon-log-out"></span></a></li>
+        {% endif %}
+
       </ul>
     </div>
   </div>
@@ -103,8 +109,12 @@
             <td width="100px"> {{ task.priority }} </td>
             <td width="100px"> {{ task.poster.name }} </td>
             <td width="100px" class="col-xs-2">
-              <a href="{{ url_for('tasks.delete_entry', task_id = task.task_id) }}" class="col-xs-1 glyphicon glyphicon-remove"/>
-              <a href="{{ url_for('tasks.complete', task_id = task.task_id) }}" class="col-xs-1 glyphicon glyphicon-ok"/>
+                {% if task.poster.name == session.name or session.role == "admin" %}
+                    <a href="{{ url_for('tasks.delete_entry', task_id = task.task_id) }}" class="col-xs-1 glyphicon glyphicon-remove"/>
+                    <a href="{{ url_for('tasks.complete', task_id = task.task_id) }}" class="col-xs-1 glyphicon glyphicon-ok"/>
+                {% else %}
+                    <span>N/A</span>
+                {% endif %}
             </td>
           </tr>
         {% endfor %}
@@ -140,7 +150,11 @@
             <td width="100px"> {{ task.priority }} </td>
             <td width="100px"> {{ task.poster_name }} </td>
             <td width="100px" class="col-xs-2">
-              <a href="{{ url_for('tasks.delete_entry', task_id = task.task_id) }}" class="col-xs-1 glyphicon glyphicon-remove"/>
+                {% if task.poster.name == session.name or session.role == "admin" %}
+                    <a href="{{ url_for('tasks.delete_entry', task_id = task.task_id) }}" class="col-xs-1 glyphicon glyphicon-remove"/>
+                {% else %}
+                    <span>N/A</span>
+                {% endif %}
             </td>
           </tr>
         {% endfor %}
